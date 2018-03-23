@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cipher/cipher.dart' as cipher;
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,10 +11,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.blue,
-      floatingActionButton: new FloatingActionButton(
-         child: new Icon(Icons.arrow_right),
-         onPressed: () => print('Pressed'),
-      ),
     );
   }
 }
