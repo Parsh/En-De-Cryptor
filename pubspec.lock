@@ -29,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.2+14"
-  bignum:
-    dependency: transitive
-    description:
-      name: bignum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.7"
   boolean_selector:
     dependency: transitive
     description:
@@ -50,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  cipher:
-    dependency: "direct main"
-    description:
-      name: cipher
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.1"
   cli_util:
     dependency: transitive
     description:
@@ -99,13 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.1+2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -373,6 +352,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.30+3"
+  tripledes:
+    dependency: "direct main"
+    description:
+      name: tripledes
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:
