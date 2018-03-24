@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   var decipherText = "";
   var blockCipher;
   bool messageFlag = false;
-  bool keyFlag = false;  
+  bool keyFlag = false;
   TextEditingController messageController;
   TextEditingController keyController;
 
@@ -46,13 +46,11 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-
   @override
   void initState() {
     super.initState();
     messageController = new TextEditingController();
     keyController = new TextEditingController();
-    print("text" + messageController.text);
   }
 
   @override
@@ -79,11 +77,23 @@ class _HomePageState extends State<HomePage> {
                     hintStyle: new TextStyle(fontSize: 21.0),
                   ),
                   controller: messageController,
-                  onChanged: (String str){
-                    setState((){
-                    this.messageFlag = str.trim() == ""? false: true;
+                  onChanged: (String str) {
+                    setState(() {
+                      if (str.trim() == "") {
+                        this.messageFlag = false;
+                        this.cipher = null;
+                        this.decipher = null;
+                        this.ciphertext = "";
+                        this.decipherText = "";
+                        Scaffold.of(context).showSnackBar(new SnackBar(
+                              content: new Text("Require: Message to En/De-Crypt!"),
+                              duration: new Duration(seconds: 800),
+                            ));
+                      } else {
+                        this.messageFlag = true;
+                      }
                     });
-                  },  
+                  },
                 ),
               ),
               new Padding(
@@ -94,11 +104,23 @@ class _HomePageState extends State<HomePage> {
                     hintStyle: new TextStyle(fontSize: 21.0),
                   ),
                   controller: keyController,
-                  onChanged:(String str){
-                    setState((){
-                    this.keyFlag = str.trim() == ""? false: true;
+                  onChanged: (String str) {
+                    setState(() {
+                      if (str.trim() == "") {
+                        this.keyFlag = false;
+                        this.cipher = null;
+                        this.decipher = null;
+                        this.ciphertext = "";
+                        this.decipherText = "";
+                        Scaffold.of(context).showSnackBar(new SnackBar(
+                              content: new Text("Require: Key to En/De-Crypt!"),
+                              duration: new Duration(milliseconds: 800),
+                            ));
+                      } else {
+                        this.keyFlag = true;
+                      }
                     });
-                  }, 
+                  },
                 ),
               ),
               new Padding(
@@ -109,19 +131,26 @@ class _HomePageState extends State<HomePage> {
                     "Encrypt",
                     style: new TextStyle(fontSize: 21.0, color: Colors.white),
                   ),
-                  onPressed: this.messageFlag == false || this.keyFlag == false ? null : encoder,
-                ),
-              ),
-              new Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: new Text(
-                  ciphertext,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(fontSize: 19.0),
+                  onPressed: this.messageFlag && this.keyFlag ? encoder : null,
                 ),
               ),
               new Opacity(
-                opacity: this.cipher == null ? 0.0 : 1.0,
+                opacity: this.messageFlag && this.keyFlag && this.cipher != null
+                    ? 1.0
+                    : 0.0,
+                child: new Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: new Text(
+                    ciphertext,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(fontSize: 19.0),
+                  ),
+                ),
+              ),
+              new Opacity(
+                opacity: this.messageFlag && this.keyFlag && this.cipher != null
+                    ? 1.0
+                    : 0.0,
                 child: new Padding(
                   padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 30.0),
                   child: new RaisedButton(
@@ -134,12 +163,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              new Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: new Text(
-                  decipherText,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(fontSize: 19.0),
+              new Opacity(
+                opacity: this.messageFlag && this.keyFlag && this.cipher != null
+                    ? 1.0
+                    : 0.0,
+                child: new Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: new Text(
+                    decipherText,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(fontSize: 19.0),
+                  ),
                 ),
               ),
             ],
