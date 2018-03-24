@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                         this.decipherText = "";
                         Scaffold.of(context).showSnackBar(new SnackBar(
                               content: new Text("Require: Message to En/De-Crypt!"),
-                              duration: new Duration(seconds: 800),
+                              duration: new Duration(milliseconds: 800),
                             ));
                       } else {
                         this.messageFlag = true;
