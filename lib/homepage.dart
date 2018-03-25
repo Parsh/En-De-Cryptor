@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     return new ListView(
       children: <Widget>[
         new Container(
-          padding: new EdgeInsets.only(top: 35.0),
+          padding: new EdgeInsets.only(top: 20.0),
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -112,10 +112,16 @@ class _HomePageState extends State<HomePage> {
                         this.decipherText = "";
 
                     setState(() {
-                      if (str.trim() == "") {
+                      if (str.trim() == "" ) {
                         this.keyFlag = false;
                         Scaffold.of(context).showSnackBar(new SnackBar(
                               content: new Text("Require: Key to En/De-Crypt!"),
+                              duration: new Duration(milliseconds: 800),
+                            ));
+                      } else if (str.trim().length <2){
+                        this.keyFlag = false;
+                        Scaffold.of(context).showSnackBar(new SnackBar(
+                              content: new Text("Required Key-Legnth [Minimum]: 2"),
                               duration: new Duration(milliseconds: 800),
                             ));
                       } else {
@@ -178,6 +184,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              new Container(
+                padding: new EdgeInsets.only(top: 40.0),
+                child: new Text("Developed by Parsh", style: new TextStyle(fontSize: 16.0, color: Colors.black38),),
+              )
             ],
           ),
         ),
