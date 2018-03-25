@@ -62,133 +62,150 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView(
+    return new Stack(
       children: <Widget>[
-        new Container(
-          padding: new EdgeInsets.only(top: 20.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: new TextField(
-                  decoration: new InputDecoration(
-                    hintText: 'Enter the message',
-                    hintStyle: new TextStyle(fontSize: 21.0),
-                  ),
-                  controller: messageController,
-                  onChanged: (String str) {
+        new ListView(
+          children: <Widget>[
+            new Container(
+              padding: new EdgeInsets.only(top: 30.0),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: new TextField(
+                      decoration: new InputDecoration(
+                        hintText: 'Enter the message',
+                        hintStyle: new TextStyle(fontSize: 21.0),
+                      ),
+                      controller: messageController,
+                      onChanged: (String str) {
                         this.cipher = null;
                         this.decipher = null;
                         this.ciphertext = "";
                         this.decipherText = "";
-                    setState(() {
-                      if (str.trim() == "") {
-                        this.messageFlag = false;
-                        Scaffold.of(context).showSnackBar(new SnackBar(
-                              content: new Text("Require: Message to En/De-Crypt!"),
-                              duration: new Duration(milliseconds: 800),
-                            ));
-                      } else {
-                        this.messageFlag = true;
-                      }
-                    });
-                  },
-                ),
-              ),
-              new Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: new TextField(
-                  decoration: new InputDecoration(
-                    hintText: 'Enter the key',
-                    hintStyle: new TextStyle(fontSize: 21.0),
+                        setState(() {
+                          if (str.trim() == "") {
+                            this.messageFlag = false;
+                            Scaffold.of(context).showSnackBar(new SnackBar(
+                                  content: new Text(
+                                      "Require: Message to En/De-Crypt!"),
+                                  duration: new Duration(milliseconds: 800),
+                                ));
+                          } else {
+                            this.messageFlag = true;
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  controller: keyController,
-                  onChanged: (String str) {
-                        
+                  new Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: new TextField(
+                      decoration: new InputDecoration(
+                        hintText: 'Enter the key',
+                        hintStyle: new TextStyle(fontSize: 21.0),
+                      ),
+                      controller: keyController,
+                      onChanged: (String str) {
                         this.cipher = null;
                         this.decipher = null;
                         this.ciphertext = "";
                         this.decipherText = "";
 
-                    setState(() {
-                      if (str.trim() == "" ) {
-                        this.keyFlag = false;
-                        Scaffold.of(context).showSnackBar(new SnackBar(
-                              content: new Text("Require: Key to En/De-Crypt!"),
-                              duration: new Duration(milliseconds: 800),
-                            ));
-                      } else if (str.trim().length <2){
-                        this.keyFlag = false;
-                        Scaffold.of(context).showSnackBar(new SnackBar(
-                              content: new Text("Required Key-Legnth [Minimum]: 2"),
-                              duration: new Duration(milliseconds: 800),
-                            ));
-                      } else {
-                        this.keyFlag = true;
-                      }
-                    });
-                  },
-                ),
-              ),
-              new Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 30.0),
-                child: new RaisedButton(
-                  color: Colors.blue,
-                  child: new Text(
-                    "Encrypt",
-                    style: new TextStyle(fontSize: 21.0, color: Colors.white),
-                  ),
-                  onPressed: this.messageFlag && this.keyFlag ? encoder : null,
-                ),
-              ),
-              new Opacity(
-                opacity: this.messageFlag && this.keyFlag && this.cipher != null
-                    ? 1.0
-                    : 0.0,
-                child: new Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: new Text(
-                    ciphertext,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(fontSize: 19.0),
-                  ),
-                ),
-              ),
-              new Opacity(
-                opacity: this.messageFlag && this.keyFlag && this.cipher != null
-                    ? 1.0
-                    : 0.0,
-                child: new Padding(
-                  padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 30.0),
-                  child: new RaisedButton(
-                    color: Colors.blue,
-                    child: new Text(
-                      "Decrypt",
-                      style: new TextStyle(fontSize: 21.0, color: Colors.white),
+                        setState(() {
+                          if (str.trim() == "") {
+                            this.keyFlag = false;
+                            Scaffold.of(context).showSnackBar(new SnackBar(
+                                  content:
+                                      new Text("Require: Key to En/De-Crypt!"),
+                                  duration: new Duration(milliseconds: 800),
+                                ));
+                          } else if (str.trim().length < 2) {
+                            this.keyFlag = false;
+                            Scaffold.of(context).showSnackBar(new SnackBar(
+                                  content: new Text(
+                                      "Required Key-Legnth [Minimum]: 2"),
+                                  duration: new Duration(milliseconds: 800),
+                                ));
+                          } else {
+                            this.keyFlag = true;
+                          }
+                        });
+                      },
                     ),
-                    onPressed: decoder,
                   ),
-                ),
-              ),
-              new Opacity(
-                opacity: this.messageFlag && this.keyFlag && this.cipher != null
-                    ? 1.0
-                    : 0.0,
-                child: new Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: new Text(
-                    decipherText,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(fontSize: 19.0),
+                  new Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 30.0),
+                    child: new RaisedButton(
+                      color: Colors.blue,
+                      child: new Text(
+                        "Encrypt",
+                        style:
+                            new TextStyle(fontSize: 21.0, color: Colors.white),
+                      ),
+                      onPressed:
+                          this.messageFlag && this.keyFlag ? encoder : null,
+                    ),
                   ),
-                ),
+                  new Opacity(
+                    opacity:
+                        this.messageFlag && this.keyFlag && this.cipher != null
+                            ? 1.0
+                            : 0.0,
+                    child: new Padding(
+                      padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
+                      child: new Text(
+                        ciphertext,
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(fontSize: 19.0),
+                      ),
+                    ),
+                  ),
+                  new Opacity(
+                    opacity:
+                        this.messageFlag && this.keyFlag && this.cipher != null
+                            ? 1.0
+                            : 0.0,
+                    child: new Padding(
+                      padding:
+                          const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 30.0),
+                      child: new RaisedButton(
+                        color: Colors.blue,
+                        child: new Text(
+                          "Decrypt",
+                          style: new TextStyle(
+                              fontSize: 21.0, color: Colors.white),
+                        ),
+                        onPressed: decoder,
+                      ),
+                    ),
+                  ),
+                  new Opacity(
+                    opacity:
+                        this.messageFlag && this.keyFlag && this.cipher != null
+                            ? 1.0
+                            : 0.0,
+                    child: new Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: new Text(
+                        decipherText,
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(fontSize: 19.0),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              new Container(
-                padding: new EdgeInsets.only(top: 40.0),
-                child: new Text("Developed by Parsh", style: new TextStyle(fontSize: 16.0, color: Colors.black38),),
-              )
-            ],
+            ),
+          ],
+        ),
+        new Container(
+          padding: new EdgeInsets.only(bottom: 20.0),
+          alignment: Alignment.bottomCenter,
+          child: new Text(
+            "Developed by Parsh",
+            style: new TextStyle(fontSize: 16.0, color: Colors.black38),
           ),
         ),
       ],
