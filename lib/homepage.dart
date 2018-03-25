@@ -78,13 +78,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   controller: messageController,
                   onChanged: (String str) {
-                    setState(() {
-                      if (str.trim() == "") {
-                        this.messageFlag = false;
                         this.cipher = null;
                         this.decipher = null;
                         this.ciphertext = "";
                         this.decipherText = "";
+                    setState(() {
+                      if (str.trim() == "") {
+                        this.messageFlag = false;
                         Scaffold.of(context).showSnackBar(new SnackBar(
                               content: new Text("Require: Message to En/De-Crypt!"),
                               duration: new Duration(milliseconds: 800),
@@ -105,13 +105,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   controller: keyController,
                   onChanged: (String str) {
-                    setState(() {
-                      if (str.trim() == "") {
-                        this.keyFlag = false;
+                        
                         this.cipher = null;
                         this.decipher = null;
                         this.ciphertext = "";
                         this.decipherText = "";
+
+                    setState(() {
+                      if (str.trim() == "") {
+                        this.keyFlag = false;
                         Scaffold.of(context).showSnackBar(new SnackBar(
                               content: new Text("Require: Key to En/De-Crypt!"),
                               duration: new Duration(milliseconds: 800),
