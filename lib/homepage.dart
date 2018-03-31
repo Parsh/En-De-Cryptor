@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         new ListView(
           children: <Widget>[
             new Container(
-              padding: new EdgeInsets.only(top: 30.0),
+              padding: new EdgeInsets.only(top: 20.0),
               child: new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10.0),
                     child: new TextField(
                       decoration: new InputDecoration(
-                        hintText: 'Enter the message',
-                        hintStyle: new TextStyle(fontSize: 21.0),
+                        labelText: 'Enter the message',
+                        labelStyle: new TextStyle(fontSize: 20.0),
                       ),
                       controller: messageController,
                       onChanged: (String str) {
@@ -103,8 +103,8 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10.0),
                     child: new TextField(
                       decoration: new InputDecoration(
-                        hintText: 'Enter the key',
-                        hintStyle: new TextStyle(fontSize: 21.0),
+                        labelText: 'Enter the key',
+                        labelStyle: new TextStyle(fontSize: 20.0),
                       ),
                       controller: keyController,
                       onChanged: (String str) {
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   new Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 50.0, 10.0, 30.0),
+                    padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 30.0),
                     child: new RaisedButton(
                       color: Colors.blue,
                       child: new Text(
